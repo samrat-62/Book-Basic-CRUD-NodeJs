@@ -21,6 +21,7 @@ db.sequelize = sequelize
 db.books = require("./models/book.model")(sequelize, DataTypes)
 db.users = require("./models/user.model")(sequelize, DataTypes)
 db.admins = require("./models/admin.model")(sequelize, DataTypes)
+db.products = require("./models/product.model")(sequelize, DataTypes)
 
 sequelize.sync({alter : false}).then(()=>{
     console.log("Migrate vayo hai")
