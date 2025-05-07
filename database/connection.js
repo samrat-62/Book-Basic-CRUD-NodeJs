@@ -1,8 +1,10 @@
 // yah database ko code ra logic lekxum
 
-const {Sequelize} = require("sequelize")
+const {Sequelize, DataTypes} = require("sequelize")
 
-const sequelize = new Sequelize("postgresql://postgres.vhhhbhoypvrltqlblvfp:Iamlearningsupabase@aws-0-ap-south-1.pooler.supabase.com:6543/postgres") 
+const sequelize = new Sequelize("postgresql://postgres.vhhhbhoypvrltqlblvfp:Iamlearningsupabase@aws-0-ap-south-1.pooler.supabase.com:6543/postgres")
+
+// const sequelize = require("./models/book.model")
 
 sequelize.authenticate()
 .then(()=>{
@@ -15,5 +17,12 @@ sequelize.authenticate()
 const db = {}
 db.Sequelize = Sequelize
 db.sequelize = sequelize
+
+db.books = require("./models/book.model")(sequelize, DataTypes)
+db.users = require("./models/user.model")(sequelize, DataTypes)
+
+sequelize.sync({alter : false}).then(()=>{
+    console.log("Migrate vayo hai")
+})
 
 module.exports = db
